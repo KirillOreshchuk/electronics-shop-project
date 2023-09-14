@@ -3,14 +3,12 @@ import pytest
 from src.item import Item
 
 
-
 @pytest.fixture()
 def item3():
     return Item("Холодильник", 30000, 10)
 
 
 def test__init__(item3):
-
     assert item3.name == "Холодильник"
     assert item3.price == 30000
 
@@ -28,3 +26,11 @@ def test_name(item3):
     assert item3.name == "Холодильник"
     item3.name = "Будильник"
     assert item3.name == "Будильник"
+
+
+def test_repr(item3):
+    assert repr(item3) == "Item('Холодильник', 30000, 10)"
+
+
+def test_str(item3):
+    assert str(item3) == "Холодильник"
