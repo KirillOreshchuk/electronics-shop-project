@@ -8,6 +8,11 @@ def item3():
     return Item("Холодильник", 30000, 10)
 
 
+@pytest.fixture()
+def item4():
+    return Item("Микроволновка", 10000, 15)
+
+
 def test__init__(item3):
     assert item3.name == "Холодильник"
     assert item3.price == 30000
@@ -34,3 +39,8 @@ def test_repr(item3):
 
 def test_str(item3):
     assert str(item3) == "Холодильник"
+
+
+def test__add__(item3, item4):
+    assert item3 + item4 == 25
+
