@@ -13,6 +13,9 @@ class MixinLanguage:
         return self.__language
 
     def change_lang(self):
+        """
+        Меняет раскладку клавиатуры с EN на RU и обратно
+        """
         if self.__language == "EN":
             self.__language = "RU"
         elif self.__language == "RU":
