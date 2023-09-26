@@ -15,6 +15,7 @@ class Item:
         :param price: Цена за единицу товара.
         :param quantity: Количество товара в магазине.
         """
+        super().__init__()
         self.__name = name
         self.price = price
         self.quantity = quantity
@@ -51,7 +52,9 @@ class Item:
 
     @staticmethod
     def string_to_number(string) -> int:
-        """статический метод, возвращает число из числа-строки"""
+        """
+        Cтатический метод, возвращает число из числа-строки
+        """
         return int(string[0])
 
     def calculate_total_price(self) -> float:
@@ -71,6 +74,9 @@ class Item:
         return self.price
 
     def __add__(self, other):
+        """
+        Складывает количество товара экземпляров класса Item и дочерних от них
+        """
         if isinstance(other, Item):
             return self.quantity + other.quantity
         else:
