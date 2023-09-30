@@ -5,8 +5,8 @@ class InstantiateCSVError(Exception):
     """
     Класс-исключение, возникает, если файл поврежден
     """
-    def __str__(self):
-        return "Файл item.csv поврежден"
+    def __init__(self, *args, **kwargs):
+        self.massage = "Файл item.csv поврежден"
 
 
 class Item:
@@ -42,13 +42,15 @@ class Item:
         try:
             with open(path, newline='', encoding='windows-1251') as csvfile:
                 reader = csv.DictReader(csvfile)
-                for row in reader:
-                    if "name" and "price" and "quantity" in row:
+                try:
+                    for row in reader:
                         item = cls(str(row['name']), float(row['price']), int(row['quantity']))
-                    else:
-                        raise InstantiateCSVError
+                except KeyError:
+                    raise InstantiateCSVError
         except FileNotFoundError:
             raise FileNotFoundError("Отсутствует файл item.csv")
+        except InstantiateCSVError:
+            raise InstantiateCSVError("Файл item.csv поврежден")
 
     @property
     def name(self):

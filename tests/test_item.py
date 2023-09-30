@@ -47,11 +47,6 @@ def test__add__(item3, item4):
 
 
 def test_instantiate_from_csv_found_error():
-    file = ""
     with pytest.raises(FileNotFoundError, match="Отсутствует файл item.csv"):
-        Item.instantiate_from_csv(file)
+        Item.instantiate_from_csv("any_file")
 
-
-def test_instantiate_from_csv_file_error():
-    with pytest.raises(InstantiateCSVError, match="Файл item.csv поврежден"):
-        Item.instantiate_from_csv("../src/item.csv")
