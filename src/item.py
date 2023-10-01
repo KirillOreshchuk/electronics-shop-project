@@ -6,7 +6,10 @@ class InstantiateCSVError(Exception):
     Класс-исключение, возникает, если файл поврежден
     """
     def __init__(self, *args, **kwargs):
-        self.massage = "Файл item.csv поврежден"
+        self.message = "Файл item.csv поврежден"
+
+    def __str__(self):
+        return self.message
 
 
 class Item:
@@ -44,13 +47,13 @@ class Item:
                 reader = csv.DictReader(csvfile)
                 try:
                     for row in reader:
-                        item = cls(str(row['name']), float(row['price']), int(row['quantity']))
+                        cls(str(row['name']), float(row['price']), int(row['quantity']))
                 except KeyError:
                     raise InstantiateCSVError
         except FileNotFoundError:
             raise FileNotFoundError("Отсутствует файл item.csv")
-        except InstantiateCSVError:
-            raise InstantiateCSVError("Файл item.csv поврежден")
+        except InstantiateCSVError as e:
+            raise InstantiateCSVError(e.message)
 
     @property
     def name(self):
